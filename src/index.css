@@ -1,5 +1,12 @@
 body {
   margin: 0;
+  height: 100vh;
+  background-image: url("https://mobimg.b-cdn.net/v3/fetch/12/124a3a0e9af52dae4990434e6eb9d196.jpeg");
+  box-sizing: border-box;
+  background-repeat: no-repeat;    
+  background-attachment: fixed;     
+  background-size: cover;     
+  background-position: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

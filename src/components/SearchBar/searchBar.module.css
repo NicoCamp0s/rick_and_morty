@@ -1,0 +1,27 @@
+.searchBar {
+    box-sizing: border-box;
+    background-color: transparent;
+    outline: 0;
+    height: 100%; 
+    border: 0;
+}
+
+.searchButton {
+    height: 100%;    
+    box-sizing: border-box;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    padding: 3px;
+}
+
+.searchInput {
+    border-radius: 10px;
+    border: 1px solid grey;
+    width: fit-content;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+    margin: auto;
+}

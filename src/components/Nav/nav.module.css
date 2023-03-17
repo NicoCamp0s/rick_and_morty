@@ -1,0 +1,17 @@
+.navBar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.links {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    gap: 50px;
+}
+
+.links > a {
+    /*saca la linea qleada de abajo */
+    text-decoration: none;
+    color: black;
+}
