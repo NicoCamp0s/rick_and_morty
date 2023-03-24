@@ -1,7 +1,7 @@
 import Fafa from "./card.module.css";
 import { Link } from "react-router-dom";
 import {connect} from "react-redux";
-import * as action from "../redux/action";
+import * as actions from "../../redux/action";
 import { addFavorites } from "../../redux/action";
 
  function Card(prop) {

@@ -1,9 +1,8 @@
 import Card from '../Card/Card.jsx';
 import Fafa from "./cards.module.css";
 
-export default function Cards(prop) {
-    const { characters, onClose } = prop
-
+export default function Cards({ characters, onClose }) {
+  
     return (
         <div className={Fafa.cards}> 
           {characters.map(({ id, name, species, gender, image }) => {

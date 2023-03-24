@@ -4,9 +4,12 @@ import { UilEnvelope,UilLockAlt } from '@iconscout/react-unicons'
 import { validation } from "../../Helpers/validation";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { validate } from "../../redux/action";
+import { useDispatch } from "react-redux";
 
-const Forms = ({setAccess}) => {
+const Forms = () => {
 
+    const dispatch = useDispatch()
     const [error,setErrors] = useState({});
     const navigate= useNavigate()
     const [userData,setUserData] = useState({});    
@@ -14,7 +17,7 @@ const Forms = ({setAccess}) => {
     //esto va hacer que evite el comportamiento default del form, (resetar la pagina).
         event.preventDefault()
         if (validation(userData,setErrors)) {
-            setAccess(true);
+            dispatch(validate());
             navigate("/home");
         }
     }
