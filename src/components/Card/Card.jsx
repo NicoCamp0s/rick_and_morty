@@ -4,9 +4,8 @@ import {connect} from "react-redux";
 import * as actions from "../../redux/action";
 import { addFavorites } from "../../redux/action";
 
- function Card(prop) {
-    const {name, species, gender, image, onClose, id} = prop
-
+ function Card({name, species, gender, image, onClose, id}) {
+    
     return (
         <div className={Fafa.card} style={{backgroundImage: `url(${image})`}}>
             <button onClick={() => onClose(id)} className={Fafa.botonX}>X</button>    

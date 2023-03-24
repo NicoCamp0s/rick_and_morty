@@ -12,7 +12,8 @@ const Forms = () => {
     const dispatch = useDispatch()
     const [error,setErrors] = useState({});
     const navigate= useNavigate()
-    const [userData,setUserData] = useState({});    
+    const [userData,setUserData] = useState({});
+        
     const submmit = (event) => {
     //esto va hacer que evite el comportamiento default del form, (resetar la pagina).
         event.preventDefault()

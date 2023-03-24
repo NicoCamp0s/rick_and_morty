@@ -11,8 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as act from "./redux/action";
 
 function App() {
-
-  const { pathname } =useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {characters, ids, access} = useSelector(state => state)
@@ -22,12 +21,15 @@ function App() {
   },[access])
 
   const onSearch = (id) => {
-    
+    if(id >= 827){
+      return alert("El personaje no existe")
+    }
+    else {
     if (ids.some((char) => char === id )) {
        return alert("Personaje repetido");
     }
     dispatch(act.addCharacters(id))
-  }
+  }}
 
   const onClose = (id) => { 
     dispatch(act.deleteCharacters(id))
@@ -35,7 +37,7 @@ function App() {
 
   return (
     <div className="divApp">
-      {pathname !== "/" && <Nav onSearch={onSearch} />} 
+      {pathname !== "/"  && <Nav onSearch={onSearch}   />} 
       <Routes>
         <Route path='/' element={<Forms />} />
         <Route 
