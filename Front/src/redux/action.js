@@ -23,7 +23,6 @@ export const validate = () => {
 export const addCharacters = (id) => {
 
     return function (dispatch) {
-
         dispatch({ type:ADD_IDS, payload: id})
         axios(`${REACT_APP_URL}/character/${id}?key=${REACT_APP_KEY}`)
         .then((response) => {
@@ -52,5 +51,12 @@ export const addFavorites = (characters) => {
     return {
         type:ADD_FAVORITES,
         payload: characters
+    }
+}
+
+export const removeFavorites = (id) => {
+    return {
+        type:DELETE_FAVORITES,
+        payload: id
     }
 }
