@@ -4,11 +4,30 @@ const initialState = {
     access: false,
     characters: [],
     myFavorites: [],
-    ids: []
+    characterDetail: {},
+    error: null
 }
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
+
+        case actions.REMOVE_ERROR:
+            return {
+                ...state,
+                error: null
+            }
+        case actions.GET_CHARACTER_DETAIL:
+            return {
+                ...state,
+                characterDetail: action.payload,
+            }
+        
+        case actions.CLEAR_DETAIL:
+            return {
+                ...state,
+                characterDetail: {},
+            }
+
         case actions.ADD_FAVORITES:
             return {
                 ...state,
@@ -22,16 +41,27 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case actions.ADD_CHARACTER:
+            if(state.characters.some(char => char.id === action.payload.id)) {
+                return {
+                    ...state,
+                    error: "PEPE personaje repetido"
+                }
+            } 
             return {
                 ...state,
                 characters: [...state.characters, action.payload]
+            }
+
+        case actions.GET_FAVORITES:
+            return {
+                ...state,
+                myFavorites: action.payload
             }
            
         case actions.DELETE_CHARATER:
             return {
                 ...state,
-                characters: state.characters.filter((char) => char.id !== action.payload),
-                ids: state.ids.filter((char) => char !== action.payload)
+                characters: state.characters.filter((char) => char.id !== action.payload)
             }
 
         case actions.VALIDATED:
@@ -40,18 +70,17 @@ const rootReducer = (state = initialState, action) => {
                 access: true
             }
 
-        case actions.ADD_IDS:
-            return {
-                ...state,
-                ids: [...state.ids, action.payload]
-            }
-
         case actions.LOGOUT:
             return {
                 ...state,
                 access: false
             }
 
+        case actions.ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
         default:
             return {...state};
     }

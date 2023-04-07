@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as act from "../../redux/action";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-const { REACT_APP_URL, REACT_APP_KEY } = process.env 
+import { useEffect } from "react";
+import Fafa from "./detail.module.css"
 
 const Detail = () => {
 
+  const dispatch = useDispatch()
   const { detailId } = useParams();
-  const [character, setCharacter] = useState({});
+  const charDetail = useSelector(state => state.characterDetail);
 
   useEffect(() => {
-    axios(`${REACT_APP_URL}/character/${detailId}?key=${REACT_APP_KEY}`)
-    .then((response) => setCharacter(response.data));
-  }, []);
-
+    dispatch(act.getCharacterDetail(detailId))
+    return () => {
+      dispatch(act.clearDetail())
+    }
+  }, [detailId])
+  
   return (
-    <div>
-      {character.name ? (
+    <div className={Fafa.detail}>
+      {charDetail.name ? (
         <>
-          <h2>{character.name}</h2>
-          <p>{character.status}</p>
-          <p>{character.species}</p>
-          <p>{character.gender}</p>
-          <p>{character.origin?.name}</p>
-          <img src={character.image} alt="img" />
+          <h2>name: {charDetail.name}</h2>
+          <h4>status: {charDetail.status}</h4>
+          <h4>species: {charDetail.species}</h4>
+          <p>gender: {charDetail.gender}</p>
+          <p>origin: {charDetail.origin?.name}</p>
+          <img src={charDetail.image} alt="img" />
         </>
       ) : (
         <h3>Loading...</h3>

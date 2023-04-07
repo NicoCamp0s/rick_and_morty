@@ -18,10 +18,10 @@ const Nav = ({onSearch}) => {
                 </Link>
                 <Link to="home" >
                     <h3 className={Fafa.home}>HOME</h3>
-                </Link> 
+                </Link>
                 <Link to="/favorites">
                     <h3 className={Fafa.logout}>FAVORITES</h3>
-                </Link>  
+                </Link>
                 <Link to="/" onClick={() => dispatch(logout())}>
                     <h3 className={Fafa.logout}>LOGOUT</h3>
                 </Link>  

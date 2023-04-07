@@ -1,14 +1,35 @@
 import Fafa from "./card.module.css";
 import { Link } from "react-router-dom";
-import {connect} from "react-redux";
+import { useDispatch } from "react-redux";
 import * as actions from "../../redux/action";
-import { addFavorites } from "../../redux/action";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
- function Card({name, species, gender, image, onClose, id}) {
+ function Card({name, species, gender, image, onClose, id, fav}) {
+    const { pathname } = useLocation()
+    const [isFav, setIsFav] = useState(fav)
+    const dispatch = useDispatch()
+
+      const handleFavorite = () => {
+        if (isFav) {
+          setIsFav(false);
+          dispatch(actions.deleteFavorites(id));
+        } else {
+          setIsFav(true);
+         dispatch(actions.addFavorites({
+            id,
+            name,
+            species,
+            gender,
+            image,
+          }));
+        }
+      };
     
     return (
         <div className={Fafa.card} style={{backgroundImage: `url(${image})`}}>
-            <button onClick={() => onClose(id)} className={Fafa.botonX}>X</button>    
+            <button onClick={handleFavorite}>{isFav ? "❤️" : "🤍"}</button>
+            {pathname !== "/favorites" && <button onClick={() => onClose(id)} className={Fafa.botonX}>X</button>}    
                 <div className={Fafa.sombreado}>
                     <div>
                         <Link to={`/detail/${id}`}>
@@ -24,18 +45,4 @@ import { addFavorites } from "../../redux/action";
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addFavorites: () => {
-            dispatch(actions.addFavorites())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default Card;

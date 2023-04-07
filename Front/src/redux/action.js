@@ -4,9 +4,19 @@ export const DELETE_FAVORITES = "DELETE_FAVORITES"
 export const ADD_CHARACTER = "ADD_CHARACTERS"
 export const DELETE_CHARATER = "DELETE_CHARACTER"
 export const VALIDATED = "VALIDATED"
-export const ADD_IDS = "ADD_IDS"
 export const LOGOUT = "LOGOUT"
+export const GET_FAVORITES = "GET_FAVORITES"
+export const GET_CHARACTER_DETAIL = "GET_CHARACTER_DETAIL"
+export const REMOVE_ERROR = "REMOVE_ERROR"
+export const CLEAR_DETAIL = "CLEAR_DETAIL"
+export const ERROR = "ERROR"
 const { REACT_APP_URL, REACT_APP_KEY } = process.env 
+
+export const removeError = () => {
+    return {
+        type: REMOVE_ERROR
+    }
+}
 
 export const logout = () => {
     return {
@@ -21,16 +31,22 @@ export const validate = () => {
 } 
 
 export const addCharacters = (id) => {
-
+    if(id) {    
+        return async function (dispatch) {
+            const response = await axios(`${REACT_APP_URL}/character/${id}?key=${REACT_APP_KEY}`)
+            dispatch({
+                type: ADD_CHARACTER,
+                payload: response.data
+            })
+        }
+    }
     return function (dispatch) {
-        dispatch({ type:ADD_IDS, payload: id})
-        axios(`${REACT_APP_URL}/character/${id}?key=${REACT_APP_KEY}`)
-        .then((response) => {
-            if (response.data.name) {
-              dispatch({ type:ADD_CHARACTER, payload:response.data })
-            }
+        dispatch({
+            type: ERROR,
+            payload: "Se necesita un id"
         })
     }
+
 }
 
 export const deleteCharacters = (id) => {
@@ -40,13 +56,6 @@ export const deleteCharacters = (id) => {
     }
 }
 
-export const addIds = (id) => {
-    return {
-        type: ADD_IDS,
-        payload: id
-    }   
-}
-
 export const addFavorites = (characters) => {
     return {
         type:ADD_FAVORITES,
@@ -54,9 +63,27 @@ export const addFavorites = (characters) => {
     }
 }
 
-export const removeFavorites = (id) => {
+export const deleteFavorites = (id) => {
     return {
         type:DELETE_FAVORITES,
         payload: id
     }
+}
+
+export const getCharacterDetail = (id) => {
+    return async function (dispatch) {
+        const response = await axios.get(`${REACT_APP_URL}/character/${id}?key=${REACT_APP_KEY}`)
+        dispatch({
+            type: GET_CHARACTER_DETAIL,
+            payload: response.data
+        })
+    }
+}
+
+export const clearDetail = () => {
+    return function (dispatch) {
+        dispatch({
+            type: CLEAR_DETAIL,
+        })
+    } 
 }

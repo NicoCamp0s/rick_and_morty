@@ -1,0 +1,14 @@
+.detail {
+    box-sizing: border-box;
+    width: 60%;
+    height: 90%;
+    outline: black solid 3px;
+    border-radius: 10%;
+    padding-top: 20px; 
+    position: relative;
+    backdrop-filter: blur(2px);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    display: inline-block;
+}

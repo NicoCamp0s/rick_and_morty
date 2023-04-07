@@ -1,0 +1,7 @@
+.alert {
+    margin: 10px auto;
+    background-color: rgb(251, 76, 76);
+    border: solid 2px black;
+    color:aliceblue;
+    font-weight: bold;
+}
